@@ -18,7 +18,7 @@ export default function Home() {
       <Grid
         container
         sx={{
-          height: "50vh",
+          minHeight: "50vh",
           boxShadow: "0 0 15px 0 rgb(193 193 193 / 60%)",
           mt: "20px",
         }}
