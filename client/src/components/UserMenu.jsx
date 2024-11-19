@@ -14,9 +14,7 @@ export default function UserMenu() {
 
   const { displayName, photoURL, auth } = user;
 
-  console.log("log--photoURL ", photoURL);
   const open = Boolean(anchorEl);
-  console.log({ user });
 
   const handleLogout = () => {
     auth.signOut();

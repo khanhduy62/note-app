@@ -13,14 +13,12 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = auth.onIdTokenChanged((user) => {
-      console.log("log--user ", user);
       if (user?.uid) {
         setUser(user);
         localStorage.setItem("accessToken", user.accessToken);
         return;
       }
 
-      console.log("log--reset");
       // reset user info
       setUser(null);
       localStorage.clear();
