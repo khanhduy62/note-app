@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import moment from "moment";
 import Grid from "@mui/material/Grid2";
 import {
@@ -23,10 +23,18 @@ import {
 export default function NoteList() {
   const { noteId, folderId } = useParams();
   const [activeNoteId, setActiveNoteId] = useState(noteId);
-  const { folder } =  { folder: { notes: [{
-    id: "1",
-    content: "<p>This is a new note</p>",
-  }] } };
+  const { folder } = useMemo(() => {
+    return {
+      folder: {
+        notes: [
+          {
+            id: "1",
+            content: "<p>This is a new note</p>",
+          },
+        ],
+      },
+    };
+  }, []);
   const submit = useSubmit();
   const navigate = useNavigate();
 

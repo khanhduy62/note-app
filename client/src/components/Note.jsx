@@ -7,7 +7,12 @@ import {
 } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
-import { useLoaderData, useSubmit, useLocation } from "react-router-dom";
+import {
+  useLoaderData,
+  useSubmit,
+  useLocation,
+  useNavigation,
+} from "react-router-dom";
 import { debounce } from "@mui/material";
 
 export default function Note() {

@@ -16,15 +16,23 @@ const typeDefs = `#graphql
     name: String,
     createdAt: String,
     author: Author,
+    notes: [Note],
   }
 
+  type Note {
+    id: String,
+    content: String,
+    folderId: String,
+  }
+    
   type Author {
     id: String,
     name: String,
   }
 
   type Query {
-    folders: [Folder]
+    folders: [Folder],
+    folder(folderId: String): Folder,
   }
 `;
 const resolvers = {
@@ -32,12 +40,19 @@ const resolvers = {
     folders: () => {
       return fakeData.folders;
     },
+    folder: (parent, args) => {
+      const { folderId } = args;
+      return fakeData.folders.find((folder) => folder.id === folderId);
+    },
   },
   Folder: {
     author: (parent) => {
       return fakeData.authors.find((author) => author.id === parent.authorId);
     },
-  }
+    notes: (parent) => {
+      return fakeData.notes.filter((note) => note.folderId === parent.id);
+    },
+  },
 };
 
 const server = new ApolloServer({
