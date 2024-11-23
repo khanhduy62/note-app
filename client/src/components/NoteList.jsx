@@ -23,18 +23,8 @@ import {
 export default function NoteList() {
   const { noteId, folderId } = useParams();
   const [activeNoteId, setActiveNoteId] = useState(noteId);
-  const { folder } = useMemo(() => {
-    return {
-      folder: {
-        notes: [
-          {
-            id: "1",
-            content: "<p>This is a new note</p>",
-          },
-        ],
-      },
-    };
-  }, []);
+  const { folder } = useLoaderData();
+
   const submit = useSubmit();
   const navigate = useNavigate();
 
@@ -63,7 +53,6 @@ export default function NoteList() {
   return (
     <Grid container height="100%">
       <Grid
-        item
         size={4}
         sx={{
           maxWidth: 360,
@@ -126,7 +115,7 @@ export default function NoteList() {
           })}
         </List>
       </Grid>
-      <Grid item size={8}>
+      <Grid size={8}>
         <Outlet />
       </Grid>
     </Grid>

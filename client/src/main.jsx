@@ -15,9 +15,9 @@ import "./firebase/config";
 
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  // <StrictMode>
     <Container maxWidth="lg" sx={{ textAlign: "center", marginTop: "50px" }}>
       <RouterProvider router={router} />
     </Container>
-  </StrictMode>
+  // </StrictMode>
 );

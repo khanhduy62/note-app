@@ -16,10 +16,7 @@ import {
 import { debounce } from "@mui/material";
 
 export default function Note() {
-  const note = {
-    id: "1",
-    content: "hello world",
-  };
+  const { note } = useLoaderData();
 
   const [editorState, setEditorState] = useState(() => {
     return EditorState.createEmpty();

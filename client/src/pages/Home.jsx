@@ -25,12 +25,12 @@ export default function Home() {
           mt: "20px",
         }}
       >
-        <Grid item size={{ xs: 12, lg: 3 }}>
+        <Grid size={{ xs: 12, lg: 3 }}>
           <FolderList
             folders={folders}
           />
         </Grid>
-        <Grid item size={{ xs: 12, lg: 9 }}>
+        <Grid size={{ xs: 12, lg: 9 }}>
           <Outlet />
         </Grid>
       </Grid>
