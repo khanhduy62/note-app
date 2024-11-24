@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { Outlet, useLoaderData, useNavigation } from "react-router-dom";
 import UserMenu from "../components/UserMenu";
-import FolderList from "../components/Folderlist";
+import FolderList from "../components/FolderList";
 
 export default function Home() {
   const {folders} = useLoaderData() || {folders: []};
