@@ -3,6 +3,7 @@ import { Button, Typography } from "@mui/material";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
+import { graphQLRequest } from "../utils/request";
 
 export default function Login() {
   const auth = getAuth();
@@ -11,8 +12,24 @@ export default function Login() {
   const handleLoginWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
 
-    const res = await signInWithPopup(auth, provider);
-    console.log("log--res ", res);
+    const {
+      user: { uid, displayName },
+    } = await signInWithPopup(auth, provider);
+
+    const query = `mutation Mutation($uid: String!, $name: String!) {
+      register(uid: $uid, name: $name) {
+        id
+        name
+      }
+    }
+    `;
+
+    const data = await graphQLRequest({
+      query,
+      variables: { uid, name: displayName },
+    });
+
+    console.log('log--register', { data });
   };
 
   useEffect(() => {
