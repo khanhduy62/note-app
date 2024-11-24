@@ -14,7 +14,7 @@ type Note {
 }
   
 type Author {
-  id: String,
+  uid: String,
   name: String,
 }
 

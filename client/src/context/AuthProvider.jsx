@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 export const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = React.useState(null);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   const auth = getAuth();
 
@@ -15,11 +17,16 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = auth.onIdTokenChanged((user) => {
       if (user?.uid) {
         setUser(user);
-        localStorage.setItem("accessToken", user.accessToken);
+        if (user.accessToken !== localStorage.getItem('accessToken')) {
+          localStorage.setItem('accessToken', user.accessToken);
+          window.location.reload();
+        }
+        setIsLoading(false);
         return;
       }
 
       // reset user info
+      setIsLoading(false);
       setUser(null);
       localStorage.clear();
       navigate("/login", {
@@ -33,7 +40,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      {children}
+      {isLoading ? <CircularProgress /> : children}
     </AuthContext.Provider>
   );
 };
