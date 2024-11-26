@@ -29,7 +29,6 @@ export default function Login() {
       variables: { uid, name: displayName },
     });
 
-    console.log('log--register', { data });
   };
 
   useEffect(() => {

@@ -37,10 +37,10 @@ const router = createBrowserRouter([
             element: <Home />,
             path: "/",
             loader: folderLoader,
-            shouldRevalidate: ({ nextUrl }) => {
-              // only revalidate if the next url is /
-              return nextUrl.pathname === "/";
-            },
+            // shouldRevalidate: ({ nextUrl }) => {
+            //   // only revalidate if the next url is /
+            //   return nextUrl.pathname === "/";
+            // },
             children: [
               {
                 element: <NoteList />,
