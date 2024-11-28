@@ -9,7 +9,6 @@ export const resolvers = {
       }).sort({
         updatedAt: "desc",
       });
-      console.log("log--context ", { context });
       return folders;
     },
     folder: async (parent, args) => {
@@ -17,9 +16,10 @@ export const resolvers = {
       const foundFolder = await FolderModel.findById(folderId);
       return foundFolder;
     },
-    note: (parent, args) => {
+    note: async (parent, args) => {
       const { noteId } = args;
-      return fakeData.notes.find((note) => note.id === noteId);
+      const note = await NoteModel.findById(noteId);
+      return note;
     },
   },
   Folder: {
@@ -57,6 +57,11 @@ export const resolvers = {
       }
 
       return foundUser;
+    },
+    addNote: async (parent, args) => {
+      const newNote = new NoteModel(args);
+      await newNote.save();
+      return newNote;
     },
   },
 };
