@@ -1,5 +1,6 @@
 import "dotenv/config";
 
+import helmet from 'helmet';
 import express from "express";
 import http from "http";
 import { ApolloServer } from "@apollo/server";
@@ -51,6 +52,14 @@ const authorizationJWT = async (req, res, next) => {
     // return res.status(401).json({ message: 'Unauthorized' });
   }
 };
+
+// Set the Referrer-Policy header
+app.use((req, res, next) => {
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
+app.use(helmet());
 
 app.use(
   cors(),
